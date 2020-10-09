@@ -12,9 +12,9 @@ import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-public enum FHArmorMaterial implements ArmorMaterial {
+public enum ModArmorMaterial implements ArmorMaterial {
 
-    THEFLASH("theflash", 15, new int[] {3, 5, 7, 2}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F, 0.0F,
+    THE_FLASH("the_flash", 15, new int[] {3, 5, 7, 2}, 0, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, 1.0F, 0.0F,
             () -> { return Ingredient.ofItems(Items.RED_DYE); });
 
     private static final int[] BASE_DURABILITY = new int[]{13, 15, 16, 11};
@@ -27,7 +27,7 @@ public enum FHArmorMaterial implements ArmorMaterial {
     private final float knockbackResistance;
     private final Lazy<Ingredient> repairIngredientSupplier;
 
-    FHArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier) {
+    ModArmorMaterial(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound, float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredientSupplier) {
         this.name = name;
         this.durabilityMultiplier = durabilityMultiplier;
         this.protectionAmounts = protectionAmounts;
