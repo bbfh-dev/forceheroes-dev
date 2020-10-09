@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "forceheroes:item/theflash_chestplate"
+    "layer0": "forceheroes:item/the_flash_boots"
   }
 }
