@@ -4,7 +4,7 @@
   "package": "com.bubblefish.forceheroes.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "LivingEntityMixin"
+    "PlayerEntityMixin"
   ],
   "client": [
   ],
