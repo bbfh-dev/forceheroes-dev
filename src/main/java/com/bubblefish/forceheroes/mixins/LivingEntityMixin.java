@@ -2,12 +2,13 @@ package com.bubblefish.forceheroes.mixins;
 
 import com.bubblefish.forceheroes.items.TheFlashArmor;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.attribute.EntityAttributeInstance;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
@@ -18,9 +19,10 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
+//    @Shadow @Final private DefaultedList<ItemStack> equippedArmor;
+
     @Shadow @Final private DefaultedList<ItemStack> equippedArmor;
 
     public LivingEntityMixin(EntityType<?> type, World world) {
@@ -29,25 +31,30 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Inject(at = @At("HEAD"), method = "tick")
     private void tick(CallbackInfo info) {
-        boolean isSpeedForced = equippedArmor.get(3).getItem().equals(TheFlashArmor.THE_FLASH_HELMET) && equippedArmor.get(2).getItem().equals(TheFlashArmor.THE_FLASH_CHESTPLATE) && equippedArmor.get(1).getItem().equals(TheFlashArmor.THE_FLASH_LEGGINGS) && equippedArmor.get(0).getItem().equals(TheFlashArmor.THE_FLASH_BOOTS);
-
-        if (isSpeedForced) {
-            changeMovementSpeed(100.0);
-        } else {
-            changeMovementSpeed(0.1);
-        }
+        try {
+            assert MinecraftClient.getInstance().player != null;
+            if (MinecraftClient.getInstance().player.getEquippedStack(EquipmentSlot.HEAD).getItem().equals(TheFlashArmor.THE_FLASH_HELMET)) {
+//                changeMovementSpeed(10.0);
+            } else {
+                changeMovementSpeed(0.1);
+            }
+        } catch (NullPointerException ignore) {}
     }
 
     private static void changeMovementSpeed(double speed) {
         EntityAttributeInstance entityAttributeInstance;
         try {
+            assert MinecraftClient.getInstance().player != null;
             entityAttributeInstance = MinecraftClient.getInstance().player.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED);
         } catch (NullPointerException e) {return;}
 
-        EntityAttributeModifier entityAttributeModifier = new EntityAttributeModifier("GENERIC_MOVEMENT_SPEED", speed , EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
         assert entityAttributeInstance != null;
-        entityAttributeInstance.removeModifier(entityAttributeModifier);
-        entityAttributeInstance.addPersistentModifier(entityAttributeModifier);
+        System.out.println(entityAttributeInstance.getValue());
+        if (entityAttributeInstance.getValue() != speed) {
+            EntityAttributeModifier entityAttributeModifier = new EntityAttributeModifier("GENERIC_MOVEMENT_SPEED", speed , EntityAttributeModifier.Operation.MULTIPLY_TOTAL);
+            entityAttributeInstance.removeModifier(entityAttributeModifier);
+            entityAttributeInstance.addPersistentModifier(entityAttributeModifier);
+        }
     }
 }
 

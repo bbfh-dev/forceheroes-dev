@@ -5,9 +5,9 @@ import com.bubblefish.forceheroes.util.enums.ModArmorMaterial;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+
 
 public class TheFlashArmor {
     public static final Item THE_FLASH_HELMET = new ArmorItem(ModArmorMaterial.THE_FLASH, EquipmentSlot.HEAD, new Item.Settings().group(ForceHeroes.GROUP));
