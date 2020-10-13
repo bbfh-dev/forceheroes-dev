@@ -1,0 +1,11 @@
+{
+  "gui.forceheroes.inventory.speed": "Speed Force",
+  "gui.forceheroes.inventory.slowmo": "Slow Motion",
+  "item.forceheroes.the_flash_helmet": "The Flash Helmet",
+  "item.forceheroes.the_flash_chestplate": "The Flash Chestplate",
+  "item.forceheroes.the_flash_leggings": "The Flash Leggings",
+  "itemGroup.forceheroes.group": "ForceHeroes Stuff",
+  "category.forceheroes.control": "ForceHeroes Controls",
+  "key.forceheroes.switchSpeedForceMode": "Switch SpeedForce",
+  "key.forceheroes.switchSlowmoMode": "Switch Slow-mo"
+}

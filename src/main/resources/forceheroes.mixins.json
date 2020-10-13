@@ -4,7 +4,10 @@
   "package": "com.bubblefish.forceheroes.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "PlayerEntityMixin"
+    "InventoryScreenMixin",
+    "MinecraftClientMixin",
+    "PlayerEntityMixin",
+    "RenderTickCounterMixin"
   ],
   "client": [
   ],
