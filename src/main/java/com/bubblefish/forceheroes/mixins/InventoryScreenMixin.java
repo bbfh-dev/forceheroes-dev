@@ -1,9 +1,11 @@
 package com.bubblefish.forceheroes.mixins;
 
+import com.bubblefish.forceheroes.extensions.StatusBarWidget;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.screen.ingame.AbstractInventoryScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
 import net.minecraft.client.gui.screen.recipebook.RecipeBookProvider;
+import net.minecraft.client.options.DoubleOption;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -42,7 +44,8 @@ public abstract class InventoryScreenMixin extends AbstractInventoryScreen<Playe
     @Inject(at = @At("TAIL"), method = "render")
     private void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo info) {
         this.client.getTextureManager().bindTexture(AbilitySlider.SLIDER);
-        AbilitySlider speedSlider = new AbilitySlider();
+        DoubleOption optionA = new DoubleOption("gui.forceheroes.slider", 0.0F, 10.0F, 1.0F, options -> 1.0, );
+        SliderWidget sliderA = optionA.createButton();
         int i = this.x;
         int j = this.y;
         this.drawTexture(matrices, mouseX / 6 * 6, mouseY / 10 * 10, 120, 0, 6, 10);
